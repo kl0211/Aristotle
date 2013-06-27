@@ -90,5 +90,5 @@ MainWindow::MainWindow(){
   createMenus();
 
   setWindowTitle(tr("Aristotle"));
-  resize(1440, 900);
+  resize(800, 600);
 }
