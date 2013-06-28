@@ -16,6 +16,7 @@
 */
 
 #include <QtGui>
+#include <QIcon>
 #include "window.h"
 #include "drawingarea.h"
 
@@ -90,5 +91,6 @@ MainWindow::MainWindow(){
   createMenus();
 
   setWindowTitle(tr("Aristotle"));
+  setWindowIcon(QIcon("aleph.svg"));
   resize(1280, 800);
 }
