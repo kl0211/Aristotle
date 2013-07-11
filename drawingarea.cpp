@@ -15,7 +15,7 @@
   along with Aristotle.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QtGui>
+#include <QtWidgets>
 #include "drawingarea.h"
 
 void DrawingBoard::drawLineTo(const QPoint & endPoint){

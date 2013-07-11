@@ -15,7 +15,7 @@
   along with Aristotle.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QIcon>
 #include "window.h"
 #include "drawingarea.h"
@@ -69,7 +69,7 @@ void MainWindow::markerColor(){
 
 void MainWindow::markerSize(){
   bool isGood;
-  int newSize = QInputDialog::getInteger(this, tr("Aristotle"),
+  int newSize = QInputDialog::getInt(this, tr("Aristotle"),
 					 tr("Set Marker Size:"),
 					 drawingArea->markerSize(),
 					 1, 50, 1, &isGood);
