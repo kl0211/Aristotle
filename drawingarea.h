@@ -26,28 +26,28 @@
 class DrawingBoard : public QWidget{
 Q_OBJECT
 
-  void drawLineTo(const QPoint &), resizeImage(QImage *, const QSize &);
-  bool modified, drawing;
-  int myMarkerSize;
-  QColor myMarkerColor;
-  QImage image;
-  QPoint lastPoint;
+   void drawLineTo(const QPoint &), erase(const QPoint &),
+        resizeImage(QImage *, const QSize &);
+   bool drawing;
+   int myMarkerSize;
+   QColor myMarkerColor;
+   QImage image;
+   QPoint lastPoint;
 
  protected:
-  void mousePressEvent(QMouseEvent *), mouseMoveEvent(QMouseEvent *),
-    mouseReleaseEvent(QMouseEvent *), paintEvent(QPaintEvent *),
-    resizeEvent(QResizeEvent *);
+   void mousePressEvent(QMouseEvent *), mouseMoveEvent(QMouseEvent *),
+   mouseReleaseEvent(QMouseEvent *), paintEvent(QPaintEvent *),
+   resizeEvent(QResizeEvent *);
 
  public:
-  DrawingBoard(QWidget * parent = 0);
-
-  void setMarkerColor(const QColor &), setMarkerSize(int);
-  bool isModified() const {return modified;}
-  QColor markerColor() const {return myMarkerColor;}
-  int markerSize() const {return myMarkerSize;}
+   DrawingBoard(QWidget * parent = 0);
+   
+   void setMarkerColor(const QColor &), setMarkerSize(int);
+   QColor markerColor() const {return myMarkerColor;}
+   int markerSize() const {return myMarkerSize;}
 
  public slots:
-  void clearImage();
+   void clearImage();
 
 };
 
