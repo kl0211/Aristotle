@@ -22,9 +22,18 @@ void DrawingBoard::drawLineTo(const QPoint & endPoint){
   QPainter painter(&image);
   painter.setPen(QPen(myMarkerColor, myMarkerSize, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
   painter.drawLine(lastPoint, endPoint);
-  modified = true;
 
   int rad = (myMarkerSize / 2) + 2;
+  update(QRect(lastPoint, endPoint).normalized().adjusted(-rad, -rad, +rad, +rad));
+  lastPoint = endPoint;
+}
+
+void DrawingBoard::erase(const QPoint & endPoint){
+  QPainter painter(&image);
+  painter.setPen(QPen(Qt::black, 20, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+  painter.drawLine(lastPoint, endPoint);
+
+  int rad = (20 / 2) + 2;
   update(QRect(lastPoint, endPoint).normalized().adjusted(-rad, -rad, +rad, +rad));
   lastPoint = endPoint;
 }
@@ -44,16 +53,26 @@ void DrawingBoard::mousePressEvent(QMouseEvent * event){
     lastPoint = event->pos();
     drawing = true;
   }
+  else if (event->button() == Qt::RightButton){
+    lastPoint = event->pos();
+    drawing = true;
+  }
 }
 
 void DrawingBoard::mouseMoveEvent(QMouseEvent * event){
   if ((event->buttons() & Qt::LeftButton) && drawing)
     drawLineTo(event->pos());
+  else if ((event->buttons() & Qt::RightButton) && drawing)
+    erase(event->pos());
 }
 
 void DrawingBoard::mouseReleaseEvent(QMouseEvent * event){
   if (event->button() == Qt::LeftButton && drawing){
     drawLineTo(event->pos());
+    drawing = true;
+  }
+  else if (event->button() == Qt::RightButton && drawing){
+    erase(event->pos());
     drawing = true;
   }
 }
@@ -77,7 +96,6 @@ void DrawingBoard::resizeEvent(QResizeEvent * event){
 DrawingBoard::DrawingBoard(QWidget * parent)
   : QWidget(parent){
   setAttribute(Qt::WA_StaticContents);
-  modified = false;
   drawing = false;
   myMarkerSize = 4;
   myMarkerColor = Qt::white;
@@ -93,6 +111,5 @@ void DrawingBoard::setMarkerSize(int newSize){
 
 void DrawingBoard::clearImage(){
   image.fill(qRgb(0,0,0));
-  modified = true;
   update();
 }

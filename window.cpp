@@ -22,42 +22,43 @@
 
 //Private Functions
 void MainWindow::createActs(){
-  quitAct = new QAction(tr("&Quit"), this);
+  quitAct = new QAction(tr("&Quit"), this);     //quit button
   quitAct->setShortcut(tr("CTRL+Q"));
   connect(quitAct, SIGNAL(triggered()), this, SLOT(close()));
 
-  markerColorAct = new QAction(tr("&Marker Color"), this);
+  markerColorAct = new QAction(tr("&Marker Color"), this);  //change the marker color
   markerColorAct->setShortcut(tr("F3"));
   connect(markerColorAct, SIGNAL(triggered()), this, SLOT(markerColor()));
 
-  markerSizeAct = new QAction(tr("&Marker Size"), this);
+  markerSizeAct = new QAction(tr("Marker &Size"), this);    //change the marker size
   markerSizeAct->setShortcut(tr("F4"));
   connect(markerSizeAct, SIGNAL(triggered()), this, SLOT(markerSize()));
 
-  clearScreenAct = new QAction(tr("&Clear Screen"), this);
+  clearScreenAct = new QAction(tr("&Clear Screen"), this);  //clear the screen of everything
   clearScreenAct->setShortcut(tr("CTRL+A"));
   connect(clearScreenAct, SIGNAL(triggered()), drawingArea, SLOT(clearImage()));
 
-  aboutAct = new QAction(tr("&About"), this);
+  aboutAct = new QAction(tr("&About"), this);   //display the about window
   aboutAct->setShortcut(tr("F1"));
   connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
+
 }
 
 void MainWindow::createMenus(){
-  fileMenu = new QMenu(tr("&File"), this);
+  fileMenu = new QMenu(tr("&File"), this);  //file menu
   fileMenu->addAction(quitAct);
 
-  optionMenu = new QMenu(tr("&Options"), this);
+  optionMenu = new QMenu(tr("&Options"), this); //options menu
   optionMenu->addAction(markerColorAct);
   optionMenu->addAction(markerSizeAct);
   optionMenu->addAction(clearScreenAct);
 
-  helpMenu = new QMenu(tr("&Help"), this);
+  helpMenu = new QMenu(tr("&Help"), this);  //help menu
   helpMenu->addAction(aboutAct);
 
-  menuBar()->addMenu(fileMenu);
-  menuBar()->addMenu(optionMenu);
-  menuBar()->addMenu(helpMenu);
+  //menuBar()->addMenu(fileMenu);     //add them to the window
+  //menuBar()->addMenu(optionMenu);
+  //menuBar()->addMenu(helpMenu);
 }
 
 //Private Slots Functions
